@@ -2,7 +2,6 @@ package com.example.futres_;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.futres_.Objetos.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.lang.reflect.Array;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,13 +60,17 @@ public class Login extends AppCompatActivity {
         call.enqueue(new Callback<String[]>() {
             @Override
             public void onResponse(Call<String[]> call, Response<String[]> response) {
-                String[] arrayResponse= response.body();
+                String[] arrayResponse = response.body();
 
                 if(arrayResponse[0].length()>1) {
+                    //informa a tela que eu estou e pra onde eu vou
                     Intent intentClassificacao = new Intent(Login.this, Classificacao.class);
+                    //coloco uma variavel pra passar entre as telas
                     intentClassificacao.putExtra("token", arrayResponse[0]);
+                    //vou pra a tela
                     startActivity(intentClassificacao);
                 } else {
+                    //primeiro parametro eh a tela, segundo paramentro e a string a ser mostrada (cuidar com o tipo)
                     Toast.makeText(Login.this, "Usuario ou senha incorretos", Toast.LENGTH_LONG).show();
                 }
             }
