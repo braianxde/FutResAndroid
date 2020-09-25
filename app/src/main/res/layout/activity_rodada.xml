@@ -8,81 +8,19 @@
     android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
-        android:text="Rodada XX"
-        android:textAlignment="center"
-        android:textSize="30sp" />
+        <Button
+            android:id="@+id/btnClassif"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_gravity="bottom"
+            android:background="#00FF00"
+            android:gravity="center"
+            android:onClick="onClickBuscar"
+            android:textStyle="bold" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:text="Grêmio      3 x 1   Internacional"
 
-        android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="São Paulo   2 x 2   Botafogo"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="Ceará   2 x 2   Fluminense"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="Corinthians   2 x 2   Palmeiras"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="São Paulo   2 x 2   Botafogo"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="Goiás   2 x 2   Bahia"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="Sport   2 x 2   Coritiba"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:text="Athletico-PR   2 x 2   Athletico-GO"
-        android:textSize="20sp" />
+
+
 </LinearLayout>
