@@ -16,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,16 +54,20 @@ public class Rodada extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
                 lista = new ArrayList<>();
+                String[] arrayRodadas =  getResources().getStringArray(R.array.escolhaRod);
 
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get("https://projetointegrador4a.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + R.array.escolhaRod[i], new AsyncHttpResponseHandler() {
+                client.get("https://projetointegrador4a.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + arrayRodadas[position], new AsyncHttpResponseHandler() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                        String data = new String(response);
+                        // Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
                         try {
                             loadData(data);
-                        } catch (JSONException e) {
+                        } catch (JSONException e){
                             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                         }
+
                     }
 
                     @Override
@@ -82,9 +87,9 @@ public class Rodada extends AppCompatActivity {
     }
 
     private void loadData(String data) throws  JSONException {
-        JsonArray array = new JsonArray(data);
+        JSONArray array = new JSONArray(data);
 
-        for (int i = 0: i < array.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             JSONObject json = array.getJSONObject(i);
             String dtjogo = json.get("Data_hora").toString();
             String golM = json.get("Gols_mandante").toString();
