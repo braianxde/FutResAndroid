@@ -57,7 +57,8 @@ public class Rodada extends AppCompatActivity {
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.get("https://projetointegrador4a.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + R.array.escolhaRod[i], new AsyncHttpResponseHandler() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                        String data = new String(response);
                         try {
                             loadData(data);
                         } catch (JSONException e) {
@@ -84,7 +85,7 @@ public class Rodada extends AppCompatActivity {
     private void loadData(String data) throws  JSONException {
         JsonArray array = new JsonArray(data);
 
-        for (int i = 0: i < array.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             JSONObject json = array.getJSONObject(i);
             String dtjogo = json.get("Data_hora").toString();
             String golM = json.get("Gols_mandante").toString();
