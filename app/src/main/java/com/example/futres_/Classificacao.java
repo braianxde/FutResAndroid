@@ -119,6 +119,7 @@ public class Classificacao extends AppCompatActivity {
 
     public void onClickRodada(View view) {
         Intent intentRodada = new Intent(Classificacao.this, Rodada.class);
+        intentRodada.putExtra("token", token);
 
         startActivity(intentRodada);
     }

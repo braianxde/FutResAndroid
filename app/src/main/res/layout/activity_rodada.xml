@@ -8,19 +8,40 @@
     android:orientation="vertical">
 
 
-        <Button
-            android:id="@+id/btnClassif"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:layout_gravity="bottom"
-            android:background="#00FF00"
-            android:gravity="center"
-            android:onClick="onClickBuscar"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Rodada:"
+                    android:textAlignment="textEnd"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
 
+                <Spinner
+                    android:id="@+id/escolha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="120dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart" />
 
+        </LinearLayout>
 
-
+     <ListView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/listView1"
+         android:layout_marginTop="10dp"/>
 
 </LinearLayout>
