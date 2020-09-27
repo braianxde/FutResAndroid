@@ -38,7 +38,6 @@ public class Classificacao extends AppCompatActivity {
         setContentView(R.layout.activity_classificacao);
         token = getIntent().getExtras().getString("token");
 
-        R.drawable.
 
         listView = findViewById(R.id.listView);
 
