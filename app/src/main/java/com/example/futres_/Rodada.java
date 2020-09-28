@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.futres_.Objetos.Partida;
 import com.google.gson.JsonArray;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -20,10 +22,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -34,7 +38,7 @@ public class Rodada extends AppCompatActivity {
     private ListView listView;
     String de [] = {"dtJogo","golMandante","golVisitante","nomeMandante","nomeVisitante"};
     int para [] = {R.id.txtData, R.id.txtGol_Mandante, R.id.txtGol_Visitante,R.id.txtNome_mandante, R.id.txtNome_visitante};
-    List<Map<String, String >> lista;
+    ArrayList<Partida> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,6 @@ public class Rodada extends AppCompatActivity {
         escollha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
-                lista = new ArrayList<>();
                 String[] arrayRodadas =  getResources().getStringArray(R.array.escolhaRod);
 
                 AsyncHttpClient client = new AsyncHttpClient();
@@ -86,6 +88,12 @@ public class Rodada extends AppCompatActivity {
 
     }
 
+    public static String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("").replace("-", "").toLowerCase().replace(" ", "");
+    }
+
     private void loadData(String data) throws  JSONException {
         JSONArray array = new JSONArray(data);
 
@@ -97,17 +105,19 @@ public class Rodada extends AppCompatActivity {
             String nomeM = json.get("Nome_mandante").toString();
             String nomeV = json.get("Nome_visitante").toString();
 
-            Map<String, String> mapa = new HashMap<>();
-            mapa.put("dtJogo", dtjogo);
-            mapa.put("golMandante", golM);
-            mapa.put("golVisitante", golV);
-            mapa.put("nomeMandante", nomeM);
-            mapa.put("nomeVisitante", nomeV);
-            lista.add(mapa);
+            String nomeSemAcentoM = deAccent(nomeM);
+            String nomeSemAcentoV = deAccent(nomeV);
 
+            int imgIdM = getResources().getIdentifier(nomeSemAcentoM, "drawable", getPackageName());
+            int imgIdV = getResources().getIdentifier(nomeSemAcentoV, "drawable", getPackageName());
+
+            Toast.makeText(getApplicationContext(), nomeSemAcentoM + " - " + Integer.toString(imgIdM), Toast.LENGTH_LONG).show();
+
+            arrayList.add(new  Partida( dtjogo,  imgIdM,  imgIdV, golM,  golV, nomeM, nomeV));
         }
-        SimpleAdapter adapter2 = new SimpleAdapter(this, lista, R.layout.linha_rodada, de, para);
-        listView.setAdapter(adapter2);
+
+        PartidaAdapter partidaAdapter = new PartidaAdapter(this, R.layout.linha_rodada, arrayList);
+        listView.setAdapter(partidaAdapter);
 
     }
 
