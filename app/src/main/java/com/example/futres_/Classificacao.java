@@ -49,6 +49,7 @@ public class Classificacao extends AppCompatActivity {
         lista = new ArrayList<>();
 
         AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Authorization", token);
         client.get("https://projetointegrador4a.azurewebsites.net/api/clube/Listarclubes", new AsyncHttpResponseHandler() {
 
 

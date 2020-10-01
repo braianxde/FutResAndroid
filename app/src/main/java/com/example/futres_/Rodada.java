@@ -35,19 +35,14 @@ import cz.msebera.android.httpclient.Header;
 public class Rodada extends AppCompatActivity {
     String token = "";
     private Spinner escollha;
-    private ListView listView;
     String de [] = {"dtJogo","golMandante","golVisitante","nomeMandante","nomeVisitante"};
     int para [] = {R.id.txtData, R.id.txtGol_Mandante, R.id.txtGol_Visitante,R.id.txtNome_mandante, R.id.txtNome_visitante};
-    ArrayList<Partida> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rodada);
         token = getIntent().getExtras().getString("token");
-
-        listView = findViewById(R.id.listView1);
-
         escollha = findViewById(R.id.escolha);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.escolhaRod,
               R.layout.meu_spinner_item);
@@ -59,6 +54,7 @@ public class Rodada extends AppCompatActivity {
                 String[] arrayRodadas =  getResources().getStringArray(R.array.escolhaRod);
 
                 AsyncHttpClient client = new AsyncHttpClient();
+                client.addHeader("Authorization", token);
                 client.get("https://projetointegrador4a.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + arrayRodadas[position], new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] response) {
@@ -96,6 +92,7 @@ public class Rodada extends AppCompatActivity {
 
     private void loadData(String data) throws  JSONException {
         JSONArray array = new JSONArray(data);
+        ArrayList<Partida> arrayList = new ArrayList<>();
 
         for (int i = 0; i < array.length(); i++) {
             JSONObject json = array.getJSONObject(i);
@@ -117,6 +114,7 @@ public class Rodada extends AppCompatActivity {
         }
 
         PartidaAdapter partidaAdapter = new PartidaAdapter(this, R.layout.linha_rodada, arrayList);
+        ListView listView = findViewById(R.id.listView1);
         listView.setAdapter(partidaAdapter);
 
     }

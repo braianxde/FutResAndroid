@@ -7,6 +7,8 @@
 
     <TextView
         android:id="@+id/txtData"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="xx/xx" />
@@ -29,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="0"
+            android:textColor="@color/black"
             android:textAlignment="center"
             android:layout_weight="1"
             android:textSize="30sp"
@@ -38,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="X"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textAlignment="center"
             android:layout_weight="1"/>
@@ -47,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="0"
+            android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -69,6 +74,7 @@
         <TextView
             android:id="@+id/txtNome_mandante"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:hint="Mandante"
             android:layout_weight="1"
@@ -77,6 +83,7 @@
         <TextView
             android:id="@+id/txtNome_visitante"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:hint="Visitante"
             android:layout_weight="1"

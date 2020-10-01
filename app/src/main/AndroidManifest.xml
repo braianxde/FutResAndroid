@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".Classificacao"></activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".Rodada"
             android:label="FutRes" />
         <activity

@@ -17,18 +17,7 @@ public interface GetWebservices {
             "Content-Type: application/json"
     })
 
-    @GET("partida/ConsultaPartidasPorRodadas/{idRodada}")
-    Call<List<Partida>> getPartidasPorRodada(@Path("idRodada") int idRodada);
-
-    //@GET("partida/ConsultaPartidasPorRodadas/{idRodada}")
-    //Call<Partida> getPartidasPorRodada(@Path("idRodada") int idRodada);
-
-    //@GET("partida/ConsultaPartidasPorRodadas/{idRodada}")
-    //Call<Partida> getPartidasPorRodada(@Path("idRodada") int idRodada);
-
     @POST("Usuario/Logar")
     Call<String[]> logar(@Body Usuario usuario);
 
-    //@POST("users/new")
-    //Call<User> createUser(@Body User user);
 }

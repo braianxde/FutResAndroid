@@ -79,7 +79,6 @@ public class Login extends AppCompatActivity {
             public void onFailure(Call<String[]> call, Throwable t) {
                 Toast.makeText(Login.this, "Falha ao conectar no servidor", Toast.LENGTH_LONG).show();
             }
-
         });
     }
 }
