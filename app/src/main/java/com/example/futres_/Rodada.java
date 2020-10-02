@@ -2,19 +2,15 @@ package com.example.futres_;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.futres_.Objetos.Partida;
-import com.google.gson.JsonArray;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -24,9 +20,6 @@ import org.json.JSONObject;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
@@ -44,6 +37,7 @@ public class Rodada extends AppCompatActivity {
         setContentView(R.layout.activity_rodada);
         token = getIntent().getExtras().getString("token");
         escollha = findViewById(R.id.escolha);
+
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.escolhaRod,
               R.layout.meu_spinner_item);
         escollha.setAdapter(adapter1);
@@ -59,7 +53,6 @@ public class Rodada extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                         String data = new String(response);
-                        // Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
                         try {
                             loadData(data);
                         } catch (JSONException e){
@@ -107,8 +100,6 @@ public class Rodada extends AppCompatActivity {
 
             int imgIdM = getResources().getIdentifier(nomeSemAcentoM, "drawable", getPackageName());
             int imgIdV = getResources().getIdentifier(nomeSemAcentoV, "drawable", getPackageName());
-
-            Toast.makeText(getApplicationContext(), nomeSemAcentoM + " - " + Integer.toString(imgIdM), Toast.LENGTH_LONG).show();
 
             arrayList.add(new  Partida( dtjogo,  imgIdM,  imgIdV, golM,  golV, nomeM, nomeV));
         }

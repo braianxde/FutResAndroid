@@ -9,8 +9,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonIOException;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -56,7 +54,6 @@ public class Classificacao extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 String data = new String(response);
-               // Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
                 try {
                     loadData(data);
                 } catch (JSONException e){
