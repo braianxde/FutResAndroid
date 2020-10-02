@@ -6,3 +6,13 @@ trazendo dados da classificacao e rodadas do brasileirao.
 <div align="center">
     <img src="/../master/login.jpeg" width="400px" height="800px"/>
 </div>
+
+
+<div align="center">
+    <img src="/../master/classificacao.jpeg" width="400px" height="800px"/>
+</div>
+
+
+<div align="center">
+    <img src="/../master/rodada.jpeg" width="400px" height="800px"/>
+</div>
