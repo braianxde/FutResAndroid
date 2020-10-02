@@ -2,6 +2,8 @@ package com.example.futres_;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +39,14 @@ public class Rodada extends AppCompatActivity {
         setContentView(R.layout.activity_rodada);
         token = getIntent().getExtras().getString("token");
         escollha = findViewById(R.id.escolha);
+
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.futreslogo);
+        getSupportActionBar().setBackgroundDrawable(
+                new ColorDrawable(Color.parseColor("#A9A9A9"))
+        );
+
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.escolhaRod,
               R.layout.meu_spinner_item);
