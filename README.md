@@ -1,4 +1,4 @@
-Projeto Android feito no curso de Análise de Desenvolvimento de Sistemas na Universidade de Santa Cruz do Sul (UNISC)
+Projeto Android feito no curso e Análise de Desenvolvimento de Sistemas na Universidade de Santa Cruz do Sul (UNISC)
 
 Este projeto consiste num app no qual irá ter controle de login de usuário e irá consumir webservices trazendo dados
 da classificação e rodadas do brasileirão.
