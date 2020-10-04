@@ -8,7 +8,7 @@ Projeto feito por:
 * MARCIO LUIZ BECKER
 * BRAIAN WEGMANN SCHUSTER
 * VALDIR LIMA DA SILVA
-* RODRIGO DA SILVEIRA FIGUEIREDO
+* EVANDRO JOSÉ DE CARVALHO
 
 <div align="center">
     <img src="/../master/login.jpeg" width="400px" height="800px"/>
