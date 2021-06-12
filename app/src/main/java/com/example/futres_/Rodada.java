@@ -16,6 +16,7 @@ import com.example.futres_.Objetos.Partida;
 import com.example.futres_.Objetos.RodadasRel;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.SyncHttpClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +34,7 @@ public class Rodada extends AppCompatActivity {
     private Spinner escollha;
     String de [] = {"dtJogo","golMandante","golVisitante","nomeMandante","nomeVisitante"};
     int para [] = {R.id.txtData, R.id.txtGol_Mandante, R.id.txtGol_Visitante,R.id.txtNome_mandante, R.id.txtNome_visitante};
-    ArrayList<Integer> rodadas = null;
+    ArrayList<RodadasRel> rodadas = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,52 +61,13 @@ public class Rodada extends AppCompatActivity {
                 } catch (JSONException e){
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, rodadas,
-              R.layout.meu_spinner_item);
-        escollha.setAdapter(adapter1);
-
-        escollha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                String[] arrayRodadas =  getResources().getStringArray(R.array.escolhaRod);
-
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.addHeader("Authorization", token);
-                client.get("https://projetointegrador4a20210527235624.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + arrayRodadas[position], new AsyncHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-                        String data = new String(response);
-                        try {
-                            loadData(data);
-                        } catch (JSONException e){
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                    }
-                });
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
     }
 
     public static String deAccent(String str) {
@@ -143,15 +105,55 @@ public class Rodada extends AppCompatActivity {
 
     private void loadDataRodada(String data) throws  JSONException {
         JSONArray array = new JSONArray(data);
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        ArrayList<RodadasRel> arrayList = new ArrayList<>();
 
         for (int i = 0; i < array.length(); i++) {
             JSONObject json = array.getJSONObject(i);
             String id = json.get("id").toString();
 
-            arrayList.add(Integer.parseInt(id));
+            arrayList.add(new RodadasRel(id));
         }
+
         rodadas = arrayList;
+
+        RodadaAdapter adapter1 = new RodadaAdapter(this, R.layout.meu_spinner_item, rodadas);
+        adapter1.notifyDataSetChanged();
+        escollha.setAdapter(adapter1);
+
+        escollha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String[] arrayRodadas =  getResources().getStringArray(R.array.escolhaRod);
+
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.addHeader("Authorization", token);
+                client.get("https://projetointegrador4a20210527235624.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + arrayRodadas[position], new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                        String data = new String(response);
+                        try {
+                            loadData(data);
+                        } catch (JSONException e){
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
     }
 
 }
