@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.futres_.Objetos.Partida;
+import com.example.futres_.Objetos.RodadasRel;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -32,6 +33,7 @@ public class Rodada extends AppCompatActivity {
     private Spinner escollha;
     String de [] = {"dtJogo","golMandante","golVisitante","nomeMandante","nomeVisitante"};
     int para [] = {R.id.txtData, R.id.txtGol_Mandante, R.id.txtGol_Visitante,R.id.txtNome_mandante, R.id.txtNome_visitante};
+    ArrayList<Integer> rodadas = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,27 @@ public class Rodada extends AppCompatActivity {
                 new ColorDrawable(Color.parseColor("#A9A9A9"))
         );
 
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Authorization", token);
+        client.get("https://projetointegrador4a20210527235624.azurewebsites.net/api/rodada/ListarRodadas", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                String data = new String(response);
+                try {
+                    loadDataRodada(data);
+                } catch (JSONException e){
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.escolhaRod,
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, rodadas,
               R.layout.meu_spinner_item);
         escollha.setAdapter(adapter1);
 
@@ -59,7 +80,7 @@ public class Rodada extends AppCompatActivity {
 
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.addHeader("Authorization", token);
-                client.get("https://projetointegrador4a.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + arrayRodadas[position], new AsyncHttpResponseHandler() {
+                client.get("https://projetointegrador4a20210527235624.azurewebsites.net/api/partida/ConsultaPartidasPorRodada/" + arrayRodadas[position], new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                         String data = new String(response);
@@ -120,5 +141,17 @@ public class Rodada extends AppCompatActivity {
 
     }
 
+    private void loadDataRodada(String data) throws  JSONException {
+        JSONArray array = new JSONArray(data);
+        ArrayList<Integer> arrayList = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject json = array.getJSONObject(i);
+            String id = json.get("id").toString();
+
+            arrayList.add(Integer.parseInt(id));
+        }
+        rodadas = arrayList;
+    }
 
 }

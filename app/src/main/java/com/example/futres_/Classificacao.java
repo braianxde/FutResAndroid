@@ -57,7 +57,7 @@ public class Classificacao extends AppCompatActivity {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", token);
-        client.get("https://projetointegrador4a.azurewebsites.net/api/clube/Listarclubes", new AsyncHttpResponseHandler() {
+        client.get("https://projetointegrador4a20210527235624.azurewebsites.net/api/clube/Listarclubes", new AsyncHttpResponseHandler() {
 
 
             @Override

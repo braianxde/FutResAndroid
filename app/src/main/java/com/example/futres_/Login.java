@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
 
-        String BASE_URL = "https://projetointegrador4a.azurewebsites.net/api/";
+        String BASE_URL = "https://projetointegrador4a20210527235624.azurewebsites.net/api/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
